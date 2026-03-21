@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HLS Live Player</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ───── Header ───── -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">▶</span>
+        <span class="logo-text">HLS<strong>Live</strong></span>
+      </div>
+      <div id="liveTag" class="live-tag live-tag--offline">● OFFLINE</div>
+    </div>
+  </header>
+
+  <!-- ───── Main layout ───── -->
+  <main>
+    <!-- Video player -->
+    <section class="player-section">
+      <div class="video-wrapper">
+        <video id="video" playsinline muted></video>
+
+        <!-- Overlay controls -->
+        <div class="video-controls" id="videoControls">
+          <button id="btnPlayPause" class="ctrl-btn" title="Play / Pause">⏸</button>
+          <div class="volume-wrap">
+            <button id="btnMute" class="ctrl-btn" title="Mute / Unmute">🔊</button>
+            <input id="volumeSlider" type="range" min="0" max="1" step="0.05" value="1" />
+          </div>
+          <select id="qualitySelect" class="quality-sel" title="Quality level"></select>
+          <span class="ctrl-spacer"></span>
+          <button id="btnFullscreen" class="ctrl-btn" title="Fullscreen">⛶</button>
+        </div>
+
+        <!-- Spinner while buffering -->
+        <div class="spinner-wrap" id="spinner">
+          <div class="spinner"></div>
+          <p id="spinnerMsg">Connecting…</p>
+        </div>
+      </div>
+
+      <!-- Stream URL bar -->
+      <div class="url-bar">
+        <label for="streamUrl">Stream URL</label>
+        <input id="streamUrl" type="text" value="http://localhost:8080/hls/stream.m3u8"
+               placeholder="Enter HLS stream URL (.m3u8)" />
+        <button id="btnLoad" class="btn-primary">Load</button>
+        <button id="btnStop" class="btn-danger" disabled>Stop</button>
+      </div>
+    </section>
+
+    <!-- Stats sidebar -->
+    <aside class="stats-panel">
+      <h2>Stream Stats</h2>
+
+      <div class="stat-group">
+        <div class="stat-card" id="statResolution">
+          <div class="stat-label">Resolution</div>
+          <div class="stat-value">—</div>
+        </div>
+        <div class="stat-card" id="statBitrate">
+          <div class="stat-label">Bitrate</div>
+          <div class="stat-value">—</div>
+        </div>
+        <div class="stat-card" id="statFps">
+          <div class="stat-label">Frame Rate</div>
+          <div class="stat-value">—</div>
+        </div>
+        <div class="stat-card" id="statBufferLen">
+          <div class="stat-label">Buffer Length</div>
+          <div class="stat-value">—</div>
+        </div>
+        <div class="stat-card" id="statLatency">
+          <div class="stat-label">Latency</div>
+          <div class="stat-value">—</div>
+        </div>
+        <div class="stat-card" id="statDropped">
+          <div class="stat-label">Dropped Frames</div>
+          <div class="stat-value">—</div>
+        </div>
+        <div class="stat-card" id="statBandwidth">
+          <div class="stat-label">Bandwidth</div>
+          <div class="stat-value">—</div>
+        </div>
+        <div class="stat-card" id="statSegments">
+          <div class="stat-label">Segments Loaded</div>
+          <div class="stat-value">—</div>
+        </div>
+      </div>
+
+      <!-- Event log -->
+      <h2 style="margin-top:1.5rem;">Event Log</h2>
+      <ul id="eventLog" class="event-log"></ul>
+    </aside>
+  </main>
+
+  <!-- ─────  hls.js – bundled locally (no internet required) ───── -->
+  <script src="hls.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "hls-live-player",
+  "version": "1.0.0",
+  "description": "HLS real-time streaming server + web client prototype",
+  "scripts": {
+    "install:server": "cd server && npm install",
+    "start": "cd server && node server.js",
+    "dev": "cd server && npx nodemon server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
